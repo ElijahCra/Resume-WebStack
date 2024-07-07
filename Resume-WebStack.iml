@@ -6,6 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/backend-resume/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/backend-resume/target" />
     </content>
+    <orderEntry type="jdk" jdkName="temurin-21" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

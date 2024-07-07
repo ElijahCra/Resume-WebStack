@@ -1,0 +1,10 @@
+services:
+  frontend-resume:
+    container_name: frontend-resume
+    build: ./frontend-resume
+  proxy:
+    container_name: "resume-proxy"
+    build: ./nginx
+    restart: always
+    ports:
+      - "80:80"

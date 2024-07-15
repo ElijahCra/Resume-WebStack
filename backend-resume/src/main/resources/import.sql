@@ -1,0 +1,1 @@
+insert into my_database.public.visit values(12, 0, 0,'1999-12-31');

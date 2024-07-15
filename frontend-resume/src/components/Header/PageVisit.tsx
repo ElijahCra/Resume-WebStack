@@ -8,7 +8,7 @@ export default function Home() {
         isLoading,
         error,
     } = useSWR(
-        "api/v1/pagevisit",
+        "/api/v1/pagevisit",
         fetcher,
         { revalidateOnFocus: false, revalidateOnReconnect: false }
     );

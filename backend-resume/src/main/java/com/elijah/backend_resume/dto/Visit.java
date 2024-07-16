@@ -18,6 +18,7 @@ public class Visit {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @JsonProperty("visit_date")
+    @Column(nullable = false)
     private LocalDate visit_date;
 
     @JsonProperty("daily_visit")

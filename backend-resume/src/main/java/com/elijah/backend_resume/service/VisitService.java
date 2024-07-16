@@ -3,11 +3,13 @@ package com.elijah.backend_resume.service;
 import com.elijah.backend_resume.dto.Visit;
 import com.elijah.backend_resume.repository.VisitRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class VisitService {
@@ -15,8 +17,19 @@ public class VisitService {
     private final VisitRepository visitRepository;
 
 
+    public Visit getBaseSiteVisit(){
+        return visitRepository.findById(0L).orElse(null);
+    }
+
     public Visit getSiteVisit(){
-        return visitRepository.findById(2L).orElse(null);
+        ///chore refactor to save daily visits
+        Visit baseVisit = getBaseSiteVisit();
+        if (baseVisit == null) {
+            log.info("site visit not found");
+        }
+        baseVisit.setTotal_visit(baseVisit.getTotal_visit() + 1);
+        visitRepository.save(baseVisit);
+        return baseVisit;
     }
 
     public Visit getVisitById(Long id){

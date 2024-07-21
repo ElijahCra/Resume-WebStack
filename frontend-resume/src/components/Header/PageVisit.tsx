@@ -1,6 +1,13 @@
 'use client'
 import useSWR from 'swr'
 
+interface PageVisit {
+    id: number;
+    visit_date: string;
+    daily_visit: number;
+    total_visit: number;
+}
+
 const fetcher = (url: Request) => fetch(url).then(r => r.json())
 export default function Home() {
     const {
@@ -8,7 +15,7 @@ export default function Home() {
         isLoading,
         error,
     } = useSWR(
-        "/api/v1/pagevisit",
+        "http://localhost:8080/api/v1/new-visit",
         fetcher,
         { revalidateOnFocus: false, revalidateOnReconnect: false }
     );
@@ -21,7 +28,8 @@ export default function Home() {
         return <p>Loading...</p>;
     }
 
+    let visitJson = JSON.parse(data);
     return (
-        <p>{data}</p>
+        <p>{visitJson.total_visit}</p>
     );
 }

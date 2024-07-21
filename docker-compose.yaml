@@ -14,7 +14,7 @@ services:
     depends_on:
       - db
     environment:
-      - POSTGRES_USER=myuser
+      - POSTGRES_USER=my_user
       - POSTGRES_PASSWORD=secret
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/my_database
       - SPRING_DATASOURCE_USERNAME=my_user

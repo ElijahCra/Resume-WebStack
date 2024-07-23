@@ -11,16 +11,14 @@ export default function PageVisit() {
         if (!hasFetched) { // Only fetch if not fetched before
             const fetchVisitCount = async () => {
                 try {
-                    const response = await fetch('http://localhost:8080/api/v1/new-visit');
+
+                    const response = await fetch('http://localhost:80/api/v1/new-visit',{ cache: 'no-store' });
 
                     if (!response.ok) { // Check if the response is successful
                         throw new Error('Network response was not ok.');
                     }
 
                     const data = await response.json();
-                    console.log("data got");
-                    console.log(data);
-                    console.log(data.total_visit);
 
                     // Ensure the API response has the correct property name:
                     if (data.total_visit !== undefined) {
@@ -31,11 +29,13 @@ export default function PageVisit() {
 
                 } catch (error) {
                     console.error('Error fetching visit count:', error);
+                    // @ts-ignore
                     setError(error.message); // Update error state
                 }
             }; fetchVisitCount();
             sessionStorage.setItem('hasFetchedVisitCount', 'true'); // Mark as fetched
         } else {
+            // @ts-ignore
             setVisitCount(parseInt(sessionStorage.getItem('visitCount'), 10) || null); // Retrieve from storage
         }
     }, []);
@@ -49,7 +49,7 @@ export default function PageVisit() {
 
     return (
         <div>
-            <h2>Total Website Visits:</h2>
+            <h2>Website Visits:</h2>
             {visitCount === null ? (
                 <p>{error ? error : "Loading..."}</p> // Display error or loading message
             ) : (

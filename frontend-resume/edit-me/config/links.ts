@@ -9,7 +9,7 @@ import { CMSLink } from 'edit-me/types/CMSLink';
 
 export const links: CMSLink[] = [
   {
-    href: 'https://github.com',
+    href: 'https://github.com/elijahcra',
     icon: SiGithub,
     title: 'GitHub',
   },
@@ -19,7 +19,7 @@ export const links: CMSLink[] = [
     title: 'Instagram',
   },
   {
-    href: 'https://www.linkedin.com',
+    href: 'https://www.linkedin.com/in/elijah-crain',
     icon: SiLinkedin,
     title: 'LinkedIn',
   },

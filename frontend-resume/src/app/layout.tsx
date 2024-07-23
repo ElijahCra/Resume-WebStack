@@ -29,10 +29,10 @@ const jetBrainsMono = JetBrains_Mono({
 
 export const generateMetadata = async (): Promise<Metadata> => {
   const host = headers().get('host');
-  const baseURL = `${protocol}://${host || vercelURL}`;
-  const siteName = `${fullName} Professional Résumé`;
-  const title = `Résumé | ${fullName} | Somewhere`;
-  const description = `Professional résumé for ${fullName}.`;
+  const baseURL = `${protocol}://${host}`;
+  const siteName = `ElijahCrain.com`;
+  const title = `Resume | ${fullName} | Software Engineer`;
+  const description = `Professional resume for ${fullName}.`;
 
   return {
     metadataBase: new URL(baseURL),
@@ -41,7 +41,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
     creator: fullName,
     description,
     generator: 'Next.js',
-    keywords: ['resume', fullName, 'next.js', 'pdf'],
+    keywords: ['resume', fullName, 'next.js', 'pdf', 'software', 'engineer'],
     openGraph: {
       type: 'profile',
       firstName: personal.givenName,

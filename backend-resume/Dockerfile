@@ -1,9 +1,22 @@
-FROM maven:3.9.6-eclipse-temurin-21-alpine AS build
-COPY src /usr/src/app/src
-COPY pom.xml /usr/src/app
-RUN mvn -f /usr/src/app/pom.xml clean package
+FROM maven:3.9.8-eclipse-temurin-21-alpine AS build
+LABEL authors="Elijah Crain"
 
-FROM eclipse-temurin:21-jdk-alpine
-COPY --from=build /usr/src/app/target/backend-resume-0.0.1-SNAPSHOT.jar /usr/app/backend-resume-0.0.1-SNAPSHOT.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/app/backend-resume-0.0.1-SNAPSHOT.jar"]
+ENV HOME=/usr/app
+RUN mkdir -p $HOME
+WORKDIR $HOME
+ADD pom.xml $HOME
+#cache dependencies
+RUN mvn verify --fail-never
+ADD . $HOME
+RUN mvn package -Dmaven.test.skip=true
+
+FROM eclipse-temurin:21-jre-alpine
+
+ARG JAR_FILE=*.jar
+ARG PORT=8080
+
+EXPOSE $PORT
+
+COPY --from=build /usr/app/target/${JAR_FILE} app.jar
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

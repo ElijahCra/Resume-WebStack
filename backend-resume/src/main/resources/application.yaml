@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/my_database
+    username: my_user
+    password: secret
+    driverClassName: org.postgresql.Driver
+  application:
+    name: springboot
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+  flyway:
+    baselineOnMigrate: true
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  sql:
+    init:
+      mode: always

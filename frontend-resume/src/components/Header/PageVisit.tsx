@@ -1,27 +1,61 @@
 'use client'
-import useSWR from 'swr'
+import React, { useState, useEffect } from 'react';
 
-const fetcher = (url: Request) => fetch(url).then(r => r.json())
-export default function Home() {
-    const {
-        data,
-        isLoading,
-        error,
-    } = useSWR(
-        "api/v1/pagevisit",
-        fetcher,
-        { revalidateOnFocus: false, revalidateOnReconnect: false }
-    );
+export default function PageVisit() {
+    const [visitCount, setVisitCount] = useState(null);
+    const [error, setError] = useState(null);
 
-    if (error) {
-        return <p>Failed to fetch</p>;
-    }
+    useEffect(() => {
+        const hasFetched = sessionStorage.getItem('hasFetchedVisitCount'); // Check if already fetched
 
-    if (isLoading) {
-        return <p>Loading...</p>;
-    }
+        if (!hasFetched) { // Only fetch if not fetched before
+            const fetchVisitCount = async () => {
+                try {
+
+                    const response = await fetch('http://localhost:80/api/v1/new-visit',{ cache: 'no-store' });
+
+                    if (!response.ok) { // Check if the response is successful
+                        throw new Error('Network response was not ok.');
+                    }
+
+                    const data = await response.json();
+
+                    // Ensure the API response has the correct property name:
+                    if (data.total_visit !== undefined) {
+                        setVisitCount(data.total_visit);
+                    } else {
+                        throw new Error(' Total_visit property not found in response');
+                    }
+
+                } catch (error) {
+                    console.error('Error fetching visit count:', error);
+                    // @ts-ignore
+                    setError(error.message); // Update error state
+                }
+            }; fetchVisitCount();
+            sessionStorage.setItem('hasFetchedVisitCount', 'true'); // Mark as fetched
+        } else {
+            // @ts-ignore
+            setVisitCount(parseInt(sessionStorage.getItem('visitCount'), 10) || null); // Retrieve from storage
+        }
+    }, []);
+
+    useEffect(() => {
+        // Store visitCount in sessionStorage when it changes (after initial fetch)
+        if (visitCount !== null) {
+            sessionStorage.setItem('visitCount', visitCount);
+        }
+    }, [visitCount]);
 
     return (
-        <p>{data}</p>
+        <div>
+            <h2>Website Visits:</h2>
+            {visitCount === null ? (
+                <p>{error ? error : "Loading..."}</p> // Display error or loading message
+            ) : (
+                <p>{visitCount}</p>
+            )}
+        </div>
     );
 }
+

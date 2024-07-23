@@ -1,0 +1,1 @@
+INSERT INTO VISIT(id,daily_visit,total_visit,visit_date) values(0,2,10,'12-31-1999');

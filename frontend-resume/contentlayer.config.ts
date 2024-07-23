@@ -123,6 +123,21 @@ export const PrivateField = defineDocumentType(() => ({
   },
 }));
 
+export const DocPage = defineDocumentType(() => ({
+  name: 'DocPage',
+  filePathPattern: 'docs/**/*.mdx', // Allow MDX for richer docs
+  fields: {
+    title: { type: 'string', required: true },
+    slug: { type: 'string', required: true }, // Manual slug for flexibility
+    description: { type: 'string', required: false },
+    category: {
+      type: 'string',
+      required: false,
+      // Add other categories (tutorials, guides, etc.) as needed
+    },
+  },
+}));
+
 export default makeSource({
   contentDirPath: 'edit-me/content',
   documentTypes: [
@@ -132,5 +147,6 @@ export default makeSource({
     Achievement,
     AdditionalInfo,
     PrivateField,
+    DocPage
   ],
 });

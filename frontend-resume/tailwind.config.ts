@@ -39,6 +39,9 @@ export default {
     extend: {
       // add semantic names for configured color choices
       colors: {
+        blue: {
+          600: '#2563eb',
+        },
         accent: colors.alias(resumeConfig.accentColor),
         accentContrast: contrastColor,
         danger: colors.alias('red'),

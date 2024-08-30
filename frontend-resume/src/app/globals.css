@@ -19,15 +19,70 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+          to bottom,
+          transparent,
+          rgb(var(--background-end-rgb))
+  )
+  rgb(var(--background-start-rgb));
+}
+
+.prose h1 {
+  @apply text-4xl font-bold mt-8 mb-6;
+}
+
+.prose h2 {
+  @apply text-3xl font-semibold mt-8 mb-4;
+}
+
+.prose h3 {
+  @apply text-2xl font-medium mt-6 mb-3;
+}
+
+.prose h4 {
+  @apply text-xl font-medium mt-4 mb-2;
+}
+
+.prose h2, .prose h3, .prose h4 {
+  @apply pt-24 -mt-20;  /* This creates space above the header for scrolling */
+}
+
+/* Add this new style */
+.prose h2::before, .prose h3::before, .prose h4::before {
+  content: "";
+  display: block;
+  height: 100px; /* Adjust this value based on your fixed header height */
+  margin-top: -100px;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+
+
+.prose a {
+  @apply text-blue-600 hover:text-blue-800;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.toc ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.toc li {
+  margin-bottom: 0.5em;
+}
+
+.toc a {
+  color: white;
+  text-decoration: none;
+}
+
+.toc a:hover,
+.toc a.active {
+  color: #0070f3;
 }

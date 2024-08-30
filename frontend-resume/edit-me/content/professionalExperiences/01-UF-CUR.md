@@ -5,7 +5,5 @@ startDate: August 2019
 endDate: May 2021
 ---
 
-- Created automatic data processing in Python with NumPy and Pandas for surveys and internal statistics.
-- Implemented interactive dashboard in Jupyter notebook used throughout the organization.
-- Utilized Swift and Xcode to develop iPhone app for mapping and detailing posters at the UF
-Undergraduate research symposium for 200+ students.
+- Automated data analysis using Python to load data from Qualtrics survey platform and perform statistical analysis with Pandas to compare the success of different programs. Generated interactive reports using generated data and Jupyter Notebook.
+- Built an iOS app that mapped research posters at the UF Undergraduate Research Symposium, an event that hosted over 200 presenters and 500 attendees yearly. Significantly reduced paper use.

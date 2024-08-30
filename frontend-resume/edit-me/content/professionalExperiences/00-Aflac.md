@@ -1,18 +1,17 @@
 ---
-title: Software Engineer I
+title: Software Engineer
 organization: Aflac
 startDate: September 2022
 ---
 
-- Created Rest API endpoints using Spring Boot to serve micro-service / multi-layer architecture.
-- Functionality included posting messages to and receiving from MSK Kafka instance, retrieval of data from
-DynamoDB, and passing of the data to the source system for updates.
-- Dockerized services for deployment to Kubernetes cluster.
-- Logging and tracing of data and endpoints using Akana and Splunk.
-- Designed and created a console application that updated and added records automatically based on
-business requirements. The application queried data from a MS SQL server using a fetch XML query.
-- Created CI/CD pipeline using GitHub and Azure DevOps to deploy and test application in test and
-production environments.
-- Developed SQL integrations for CRM platform, tasked with debugging and fixing a failing query that was
-causing a daily job to fail. The implemented query completed 85% faster used 40% less memory. Metrics
-tracked using .NET’s QueryMetrics.
+- Modernized legacy enrollment data distribution system for four customer management systems by establishing a micro-service architecture. Improved response time by 65\%, enhancing integration and distribution of data in real-time.
+
+- Streamed data using Kafka (MSK) cluster and managed consumer groups for horizontal scaling. Achieved a 100\% message delivery success rate withstanding peak loads of over 250,000 requests per day.
+
+- Developed servers with Spring Boot and Maven that provided REST APIs, Kafka publishers and consumers as well as direct database updates.
+
+- Secured services with OAuth 2.0 tokens, implemented automated API call retries, and protected downstream endpoints with circuit breaking.
+
+- Configured AWS lambdas with MSK event sources to transform data through DynamoDB tables. Utilized DynamoDB streams to trigger lambdas to post updates back to Kafka.
+
+- Improved CI/CD to create docker containers for upload to AWS ECR and deployment using cloud formation. Created a comprehensive suite for unit and integration testing, providing 90\% code coverage. Logged progress using Splunk and saved failed messages to S3.

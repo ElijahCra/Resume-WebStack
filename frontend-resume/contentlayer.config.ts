@@ -123,30 +123,16 @@ export const PrivateField = defineDocumentType(() => ({
   },
 }));
 
-export const DocPage = defineDocumentType(() => ({
-  name: 'DocPage',
-  filePathPattern: 'docs/**/*.mdx', // Allow MDX for richer docs
-  fields: {
-    title: { type: 'string', required: true },
-    slug: { type: 'string', required: true }, // Manual slug for flexibility
-    description: { type: 'string', required: false },
-    category: {
-      type: 'string',
-      required: false,
-      // Add other categories (tutorials, guides, etc.) as needed
-    },
-  },
-}));
-
 export const Post = defineDocumentType(() => ({
   name: 'Post',
   filePathPattern: `posts/*.md`,
   fields: {
     title: { type: 'string', required: true },
     date: { type: 'date', required: true },
+    slug: { type: 'string', required: true },
   },
   computedFields: {
-    url: { type: 'string', resolve: (post) => `/posts/${post._raw.flattenedPath}` },
+    url: { type: 'string', resolve: (post) => `/posts/${post.slug}` },
   },
 }))
 
@@ -159,7 +145,6 @@ export default makeSource({
     Achievement,
     AdditionalInfo,
     PrivateField,
-    DocPage,
     Post
   ],
 });

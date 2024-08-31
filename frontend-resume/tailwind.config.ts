@@ -41,6 +41,7 @@ export default {
       colors: {
         blue: {
           600: '#2563eb',
+          1200: '#0070f3'
         },
         accent: colors.alias(resumeConfig.accentColor),
         accentContrast: contrastColor,

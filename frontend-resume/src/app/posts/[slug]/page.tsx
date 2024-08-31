@@ -3,6 +3,7 @@ import { format, parseISO } from 'date-fns'
 import { allPosts } from '@content'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 import dynamic from 'next/dynamic'
+import 'prismjs/themes/prism-tomorrow.css'
 
 const DynamicTableOfContents = dynamic(
     () => import("../../../components/Posts/TableOfContents.tsx"),
@@ -38,7 +39,7 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
 
     return (
         <div className="flex relative min-h-screen">
-            <aside className="w-64 h-full fixed left-0 top-0 p-4 z-10 overflow-y-auto">
+            <aside className="w-64 h-full fixed left-0 top-0 p-4 z-10 overflow-y-auto bg-gray-950">
                 <DynamicTableOfContents headings={headings}/>
             </aside>
             <div className="gradient-divider"></div>
@@ -51,7 +52,10 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
                         <h1 className="text-4xl font-bold">{post.title}</h1>
                     </div>
                     <div className="prose prose-invert prose-lg">
-                        <MDXContent/>
+                        <MDXContent components={{
+                            pre: (props) => <pre {...props} className="language-jsx"/>,
+                            code: (props) => <code {...props} className="language-jsx"/>
+                        }}/>
                     </div>
                 </article>
             </main>

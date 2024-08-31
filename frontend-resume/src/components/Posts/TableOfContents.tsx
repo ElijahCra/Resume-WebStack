@@ -7,31 +7,8 @@ interface TableOfContentsProps {
 }
 
 const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) => {
-    const [activeId, setActiveId] = useState('')
+    const [activeId, setActiveId] = useState(headings[0].id)
     const yOffset = -28
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveId(entry.target.id)
-                    }
-                })
-            },
-            {
-                rootMargin: '0px 0px -80% 0px',
-                threshold: 1.0
-            }
-        )
-
-        headings.forEach((heading) => {
-            const element = document.getElementById(heading.id)
-            if (element) observer.observe(element)
-        })
-
-        return () => observer.disconnect()
-    }, [headings])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -46,21 +23,21 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) => {
                 }
             }
 
+            if (currentActiveId === ''){currentActiveId = headings[0].id}
             if (currentActiveId !== activeId) {
                 setActiveId(currentActiveId)
             }
+
         }
 
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
-    }, [headings, activeId])
+    }, [headings, activeId, yOffset])
 
     const scrollToHeading = (headingId: string) => {
         const element = document.getElementById(headingId)
         if (element) {
             const y = element.getBoundingClientRect().top + window.scrollY + yOffset
-
-
             window.scrollTo({ top: y, behavior: 'smooth' })
         }
     }
@@ -69,7 +46,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) => {
         <nav className="toc">
             <ul className="space-y-2">
                 {headings.map((heading) => (
-                    <li key={heading.id} style={{ paddingLeft: `${(heading.level - 1) * 16}px` }}>
+                    <li key={heading.id} style={{ paddingLeft: `${(heading.level-1) * 25+10}px` }}>
                         <a
                             href={`#${heading.id}`}
                             className={activeId === heading.id ? 'active' : ''}

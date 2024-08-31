@@ -2,6 +2,7 @@ import { defineDocumentType, makeSource } from 'contentlayer/source-files';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
+import rehypePrismAll from "rehype-prism-plus";
 
 export const Personal = defineDocumentType(() => ({
   name: 'Personal',
@@ -155,6 +156,7 @@ export default makeSource({
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
+      rehypePrismAll,
     ],
   },
 });

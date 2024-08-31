@@ -28,7 +28,7 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
 
     const headings = post.body.raw
         .split('\n')
-        .filter((line) => line.match(/^##*\s/))
+        .filter((line) => line.match(/^#+\s/))
         .map((line) => {
             const level = line.indexOf(' ')
             const text = line.slice(level + 1)

@@ -42,22 +42,6 @@ body {
   @apply text-xl font-medium mt-4 mb-2;
 }
 
-.prose h2, .prose h3, .prose h4 {
-  @apply pt-24 -mt-20;  /* This creates space above the header for scrolling */
-}
-
-/* Add this new style */
-.prose h2::before, .prose h3::before, .prose h4::before {
-  content: "";
-  display: block;
-  height: 100px; /* Adjust this value based on your fixed header height */
-  margin-top: -100px;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-
-
 .prose a {
   @apply text-blue-600 hover:text-blue-800;
 }

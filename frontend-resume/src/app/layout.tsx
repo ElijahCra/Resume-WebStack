@@ -11,7 +11,7 @@ import { protocol, vercelURL } from 'src/helpers/env';
 import { fullName } from 'src/helpers/utils';
 import { twMerge } from 'tailwind-merge';
 import { ThemeSetting } from '../../edit-me/types/Config';
-import './globals.css';
+import '../styles/globals.css';
 
 const accentColor = resumeConfig.accentColor;
 

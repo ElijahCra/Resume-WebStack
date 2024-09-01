@@ -6,36 +6,37 @@ import Professional from 'src/components/Articles/Professional';
 import Skills from 'src/components/Articles/Skills';
 import { Footer } from 'src/components/Footer/Footer';
 import { Header } from 'src/components/Header/Header';
+import Banner from "../components/Banner/Banner.tsx";
 
 export default function Home() {
   return (
       <>
-        <Header />
+          <Banner/>
+          <div className="container mt-20">
+              <Header />
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  <AboutMe />
+                  <ContactInformation />
+              </div>
 
-        <div className="container">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <AboutMe />
-            <ContactInformation />
+              <div className="mt-12">
+                  <Skills />
+              </div>
+
+              <div className="mt-12">
+                  <Professional />
+              </div>
+
+              <div className="mt-12">
+                  <Achievements />
+              </div>
+
+              <div className="mt-12">
+                  <AdditionalInfo />
+              </div>
           </div>
 
-          <div className="mt-12">
-            <Skills />
-          </div>
-
-          <div className="mt-12">
-            <Professional />
-          </div>
-
-          <div className="mt-12">
-            <Achievements />
-          </div>
-
-          <div className="mt-12">
-            <AdditionalInfo />
-          </div>
-        </div>
-
-        <Footer />
+          <Footer />
       </>
   );
 }

@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Oregon-Regular';
+    src: url('../../public/fonts/OregonLdo-d9q7.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Oregon-Demi';
+    src: url('../../public/fonts/OregonLdoDemibold-x3qR.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Oregon-Medium';
+    src: url('../../public/fonts/OregonLdoMedium-BWen.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Oregon-Bold';
+    src: url('../../public/fonts/OregonLdoExtendedBold-JRen.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Oregon-ExtraBold';
+    src: url('../../public/fonts/OregonLdoExtrabold-ywqZ.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

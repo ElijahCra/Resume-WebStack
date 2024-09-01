@@ -37,7 +37,7 @@ export default {
   ],
   theme: {
     extend: {
-      // add semantic names for configured color choices
+
       colors: {
         blue: {
           600: '#2563eb',
@@ -61,6 +61,8 @@ export default {
       fontFamily: {
         mono: ['var(--font-jetbrains-mono)'],
         sans: ['var(--font-albert)'],
+        customHeader: ['Oregon-Bold'],
+        customBody: ['Oregon-Regular']
       },
     },
   },

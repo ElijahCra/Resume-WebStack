@@ -1,0 +1,71 @@
+---
+title: My First Post
+date: 2021-12-24
+slug: post2
+image: /images/boss_crain.jpg
+---
+
+# Understanding React Hooks
+React Hooks have revolutionized the way we write React components. In this post, we'll explore some of the most commonly used hooks and how they can improve your React applications.
+## Sub Heading
+Sub text
+# Basic Usage
+Here's a simple example of how to use useState:
+
+```jsx
+font-family;
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+      You clicked {count} times
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+  );
+}
+```
+
+# Fetching Data with useEffect
+
+Here's how you might use useEffect to fetch data:
+
+```jsx
+import React, { useState, useEffect } from 'react';
+
+function DataFetcher() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch('https://api.example.com/data')
+      .then(response => response.json())
+      .then(data => setData(data));
+  }, []); // Empty dependency array means this effect runs once on mount
+
+  if (!data) return 'Loading...';
+
+  return {JSON.stringify(data)};
+}
+```
+
+# Using Context
+
+Here's a basic example of useContext:
+
+```jsx
+import React, { useContext } from 'react';
+
+const ThemeContext = React.createContext('light');
+
+function ThemedButton() {
+  const theme = useContext(ThemeContext);
+  return I am styled by theme context!;
+}
+```
+
+# Conclusion
+
+React Hooks provide a more direct way to use state and other React features without writing a class. They allow you to reuse stateful logic without changing your component hierarchy.
+
+As you become more comfortable with hooks, you'll find that they can significantly simplify your React components and make your code more readable and maintainable.

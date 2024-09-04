@@ -37,8 +37,12 @@ export default {
   ],
   theme: {
     extend: {
-      // add semantic names for configured color choices
+
       colors: {
+        blue: {
+          600: '#2563eb',
+          1200: '#0070f3'
+        },
         accent: colors.alias(resumeConfig.accentColor),
         accentContrast: contrastColor,
         danger: colors.alias('red'),
@@ -57,6 +61,9 @@ export default {
       fontFamily: {
         mono: ['var(--font-jetbrains-mono)'],
         sans: ['var(--font-albert)'],
+        customTitle: ['Robo-Bold'],
+        customHeader: ['Robo-Regular'],
+        customBody: ['Robo-Light']
       },
     },
   },

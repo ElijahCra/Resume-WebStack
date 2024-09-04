@@ -8,6 +8,7 @@ const AchievementItem: React.FC<Achievement> = ({
   achievement,
   body,
   organization,
+  completionDate
 }) => {
   return (
     <article className="border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0">
@@ -17,7 +18,8 @@ const AchievementItem: React.FC<Achievement> = ({
 
       <div className="mt-1 flex items-center gap-2 font-medium tracking-wide">
         <AcademicCapIcon className="h-6" />
-        {organization}
+        {organization}, {completionDate}
+
       </div>
 
       <Prose html={body.html} />

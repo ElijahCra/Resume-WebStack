@@ -7,11 +7,11 @@ import resumeConfig from '../../edit-me/config/resumeConfig';
 // STYLES
 import { personal } from '@content';
 import { headers } from 'next/headers';
-import { protocol, vercelURL } from 'src/helpers/env';
+import { protocol } from 'src/helpers/env';
 import { fullName } from 'src/helpers/utils';
 import { twMerge } from 'tailwind-merge';
 import { ThemeSetting } from '../../edit-me/types/Config';
-import './globals.css';
+import '../styles/globals.css';
 
 const accentColor = resumeConfig.accentColor;
 
@@ -57,6 +57,10 @@ export const generateMetadata = async (): Promise<Metadata> => {
       creator: fullName,
       description,
       title,
+    },
+    icons: {
+      icon: '/icon.png',
+      apple: '/icon.png',
     },
   };
 };

@@ -1,0 +1,94 @@
+@import 'fonts.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #0f172a;
+  --bg-secondary: rgba(20,33,36,1);
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --accent-primary: #38bdf8;
+  --accent-secondary: #818cf8;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.radial-gradient-bg {
+  background: radial-gradient(ellipse at bottom, rgba(2,0,36,1) 0%, rgba(1,0,15,1) 21%, rgba(0,0,0,1) 42%, rgba(20,33,36,1) 100%);
+  min-height: 100vh;
+}
+
+.post h1, h2, h3, h4, h5, h6 {
+  color: var(--accent-primary);
+  @apply font-customHeader spacing-l-header mt-5 mb-1.5;
+}
+
+.post h1 {
+  @apply text-2xl ;
+}
+
+.post h2 {
+  @apply text-1-5xl;
+}
+
+.post h3, .prose h4 {
+  color: var(--text-secondary);
+}
+
+.post p{
+  @apply font-customBody text-large spacing-l-body mb-4;
+}
+
+.toc {
+  @apply font-customBody;
+}
+
+.toc a {
+  color: var(--text-primary);
+  @apply transition-colors duration-200 spacing-l-body;
+}
+
+.toc a:hover,
+.toc a.active {
+  color: var(--accent-primary);
+}
+
+.bg-custom-1 {
+  background-color: var(--bg-secondary);
+}
+.text-1-5xl {
+  font-size: 1.35rem/* 24px */;
+  line-height: 1.9rem/* 32px */;
+}
+.text-large {
+  font-size: 1.15rem/* 24px */;
+  line-height: 1.45rem/* 32px */;
+}
+.spacing-l-title {
+  letter-spacing: .18rem;
+}
+.spacing-l-header {
+   letter-spacing: .06rem;
+ }
+.spacing-l-body {
+  letter-spacing: .01rem;
+}
+.prose ul {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+.banner-base-color{
+  background: #0d1520
+}
+.banner-scroll-color {
+
+}

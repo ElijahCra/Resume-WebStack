@@ -1,4 +1,5 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
+import rehypePrism from "rehype-prism-plus";
 
 export const Personal = defineDocumentType(() => ({
   name: 'Personal',
@@ -90,8 +91,8 @@ export const Achievement = defineDocumentType(() => ({
         'The name of the school, organization, or program you earned your achievement from',
       required: true,
     },
-    completionYear: {
-      type: 'number',
+    completionDate: {
+      type: 'string',
       description: 'The year you earned your achievement',
       required: true,
     },
@@ -123,20 +124,21 @@ export const PrivateField = defineDocumentType(() => ({
   },
 }));
 
-export const DocPage = defineDocumentType(() => ({
-  name: 'DocPage',
-  filePathPattern: 'docs/**/*.mdx', // Allow MDX for richer docs
+export const Post = defineDocumentType(() => ({
+  name: 'Post',
+  filePathPattern: `posts/*.mdx`,
+  contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
-    slug: { type: 'string', required: true }, // Manual slug for flexibility
-    description: { type: 'string', required: false },
-    category: {
-      type: 'string',
-      required: false,
-      // Add other categories (tutorials, guides, etc.) as needed
-    },
+    date: { type: 'date', required: true },
+    slug: { type: 'string', required: true },
+    image: { type: 'string', required: true },
   },
-}));
+  computedFields: {
+    url: { type: 'string', resolve: (post) => `/posts/${post.slug}` },
+  },
+}))
+
 
 export default makeSource({
   contentDirPath: 'edit-me/content',
@@ -147,6 +149,11 @@ export default makeSource({
     Achievement,
     AdditionalInfo,
     PrivateField,
-    DocPage
+    Post
   ],
+  mdx: {
+    rehypePlugins: [
+      rehypePrism,
+    ],
+  },
 });

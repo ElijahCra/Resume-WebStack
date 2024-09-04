@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'Robo-Regular';
+    src: url('../../public/fonts/RobotoSlabRegular-w1GE3.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Robo-Light';
+    src: url('../../public/fonts/RobotoSlabLight-7Br0P.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Robo-Medium';
+    src: url('../../public/fonts/RobotoSlabMedium-vmAEA.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+
+}
+@font-face {
+    font-family: 'Robo-Bold';
+    src: url('../../public/fonts/RobotoSlabBold-PKGJr.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+
+}
+
+
+
+@font-face {
+    font-family: 'Robo-Black';
+    src: url('../../public/fonts/RobotoSlabBlack-d9xgK.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

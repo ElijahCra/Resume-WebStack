@@ -1,7 +1,7 @@
 ---
 achievement: Cloud Practitioner
 organization: AWS
-completionYear: 2024
+completionDate: November 2024
 ---
 
 TODO

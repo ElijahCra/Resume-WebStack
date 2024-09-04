@@ -49,7 +49,7 @@ export default function PageVisit() {
 
     return (
         <div>
-            <h2>Website Visits:</h2>
+            <h2 className={'text-accent-11'}>Website Visits:</h2>
             {visitCount === null ? (
                 <p>{error ? error : "Loading..."}</p> // Display error or loading message
             ) : (

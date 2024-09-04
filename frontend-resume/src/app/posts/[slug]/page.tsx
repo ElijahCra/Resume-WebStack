@@ -45,12 +45,12 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
             <main className="flex-1 ml-64 p-8 text-white radial-gradient-bg">
                 <article className="max-w-3xl mx-auto">
                     <div className="mb-8 text-center">
-                        <h1 className="text-4xl font-customHeader">{post.title}</h1>
-                        <time dateTime={post.date} className="mb-1 text-sm text-gray-400">
+                        <h1 className="text-4xl font-customTitle spacing-l-title">{post.title}</h1>
+                        <time dateTime={post.date} className="mb-1 text-sm font-customBody text-gray-400">
                             {format(parseISO(post.date), 'LLLL d, yyyy')}
                         </time>
                     </div>
-                    <div className="prose">
+                    <div className="post">
                         <MDXContent components={{
                             pre: (props) => <pre {...props} className="language-jsx"/>,
                             code: (props) => <code {...props} className="language-jsx"/>

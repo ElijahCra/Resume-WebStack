@@ -25,7 +25,10 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
         {startDate}–{!endDate ? 'Current' : endDate}
       </div>
 
-      <Prose html={body.html} />
+      <Prose
+          html={body.html}
+          className="prose-ul:list-disc prose-ul:pl-5 prose-li:mb-2"
+      />
     </article>
   );
 };

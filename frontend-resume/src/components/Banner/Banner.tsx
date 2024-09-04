@@ -10,7 +10,7 @@ const Banner: React.FC = () => {
     useEffect(() => {
         const handleScroll = () => {
             const scrollPosition = window.scrollY
-            setIsScrolled(scrollPosition > 50)
+            setIsScrolled(scrollPosition > 5)
         }
 
         const updateHeight = () => {
@@ -41,7 +41,7 @@ const Banner: React.FC = () => {
         <header
             ref={bannerRef}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-                isScrolled ? 'bg-gray-900 py-2' : 'bg-gray-800 py-6'
+                isScrolled ? 'bg-slate-3 py-2' : 'bg-slate-3 py-6'
             }`}
         >
             <div className="max-w-6xl mx-auto px-4">
@@ -49,15 +49,12 @@ const Banner: React.FC = () => {
                     isScrolled ? 'text-sm' : 'text-base'
                 }`}>
                     <div className="flex items-center space-x-4">
-                        <Link href="/" className="text-white hover:text-blue-300 transition-colors">
+                        <Link href="/" className="text-white hover:text-accent-11 transition-colors">
                             Home
                         </Link>
-                        <Link href="/posts" className="text-white hover:text-blue-300 transition-colors">
+                        <Link href="/posts" className="text-white hover:text-accent-11 transition-colors">
                             Posts
                         </Link>
-                    </div>
-                    <div className="text-white font-bold">
-                        Your Site Name
                     </div>
                 </div>
             </div>

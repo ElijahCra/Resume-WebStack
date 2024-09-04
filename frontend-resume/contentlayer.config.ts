@@ -1,7 +1,4 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeSlug from 'rehype-slug'
-import remarkGfm from 'remark-gfm'
 import rehypePrism from "rehype-prism-plus";
 
 export const Personal = defineDocumentType(() => ({
@@ -94,8 +91,8 @@ export const Achievement = defineDocumentType(() => ({
         'The name of the school, organization, or program you earned your achievement from',
       required: true,
     },
-    completionYear: {
-      type: 'number',
+    completionDate: {
+      type: 'string',
       description: 'The year you earned your achievement',
       required: true,
     },
@@ -135,11 +132,13 @@ export const Post = defineDocumentType(() => ({
     title: { type: 'string', required: true },
     date: { type: 'date', required: true },
     slug: { type: 'string', required: true },
+    image: { type: 'string', required: true },
   },
   computedFields: {
     url: { type: 'string', resolve: (post) => `/posts/${post.slug}` },
   },
 }))
+
 
 export default makeSource({
   contentDirPath: 'edit-me/content',
@@ -153,9 +152,7 @@ export default makeSource({
     Post
   ],
   mdx: {
-    remarkPlugins: [remarkGfm],
     rehypePlugins: [
-      rehypeSlug,
       rehypePrism,
     ],
   },

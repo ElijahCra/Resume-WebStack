@@ -15,31 +15,32 @@
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: 'CustomBody', sans-serif;
 }
 
 .radial-gradient-bg {
-  background: radial-gradient(closest-corner, rgba(2,0,36,1) 0%, rgba(1,0,15,1) 31%, rgba(0,0,0,1) 72%, rgba(20,33,36,1) 100%);
+  background: radial-gradient(ellipse at bottom, rgba(2,0,36,1) 0%, rgba(1,0,15,1) 21%, rgba(0,0,0,1) 42%, rgba(20,33,36,1) 100%);
   min-height: 100vh;
 }
 
-.prose h1 {
+.post h1, h2, h3, h4, h5, h6 {
   color: var(--accent-primary);
-  @apply text-2xl font-customHeader mt-8 mb-4;
+  @apply font-customHeader spacing-l-header mt-5 mb-1.5;
 }
 
-.prose h2 {
-  color: var(--text-primary);
-  @apply text-1-5xl font-customHeader mt-5 mb-4;
+.post h1 {
+  @apply text-2xl ;
 }
 
-.prose h3, .prose h4 {
+.post h2 {
+  @apply text-1-5xl;
+}
+
+.post h3, .prose h4 {
   color: var(--text-secondary);
-  @apply font-customHeader;
 }
 
-.prose p{
-  @apply font-customBody text-xl;
+.post p{
+  @apply font-customBody text-large spacing-l-body mb-4;
 }
 
 .toc {
@@ -47,8 +48,8 @@ body {
 }
 
 .toc a {
-  color: var(--text-secondary);
-  @apply transition-colors duration-200;
+  color: var(--text-primary);
+  @apply transition-colors duration-200 spacing-l-body;
 }
 
 .toc a:hover,
@@ -63,7 +64,31 @@ body {
   font-size: 1.35rem/* 24px */;
   line-height: 1.9rem/* 32px */;
 }
+.text-large {
+  font-size: 1.15rem/* 24px */;
+  line-height: 1.45rem/* 32px */;
+}
+.spacing-l-title {
+  letter-spacing: .18rem;
+}
+.spacing-l-header {
+   letter-spacing: .06rem;
+ }
+.spacing-l-body {
+  letter-spacing: .01rem;
+}
+.prose ul {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+}
 
-.prose pre {
-  @apply font-customBody
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+.banner-base-color{
+  background: #0d1520
+}
+.banner-scroll-color {
+
 }

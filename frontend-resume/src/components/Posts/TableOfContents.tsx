@@ -8,7 +8,7 @@ interface TableOfContentsProps {
 
 const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) => {
     const [activeId, setActiveId] = useState(headings[0].id)
-    const yOffset = -28
+    const yOffset = -18
 
     useEffect(() => {
         const handleScroll = () => {

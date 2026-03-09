@@ -1,40 +1,29 @@
-FROM node:24-alpine AS base
-
-FROM base AS deps
-
-RUN apk add --no-cache libc6-compat
+FROM oven/bun:1-alpine AS deps
 WORKDIR /app
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
 
-COPY package.json ./
-
-RUN bun install &&  yarn bun
-
-FROM base AS builder
+FROM oven/bun:1-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
 RUN bun run build
 
-FROM base AS runner
+FROM oven/bun:1-alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+ENV NODE_ENV=production
 
-COPY --from=builder /app/public ./public
+RUN addgroup --system --gid 1001 sveltekit
+RUN adduser --system --uid 1001 sveltekit
 
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
+COPY --from=builder --chown=sveltekit:sveltekit /app/build ./build
+COPY --from=builder --chown=sveltekit:sveltekit /app/package.json ./
 
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
+USER sveltekit
 
 EXPOSE 3000
 
-ENV PORT 3000
+ENV PORT=3000
 
-CMD ["node", "server.js"]
+CMD ["bun", "build/index.js"]

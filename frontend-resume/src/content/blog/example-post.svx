@@ -1,0 +1,64 @@
+---
+title: "Getting Started with SvelteKit and TypeScript"
+date: "2025-12-09"
+description: "Learn how to build modern web applications with SvelteKit and TypeScript for type-safe, performant web development."
+tags: ["svelte", "typescript", "web-development", "tutorial"]
+categories: ["Web Development", "Tutorial"]
+author: "Elijah Crain"
+published: true
+coverImage: "/blog-images/placeholder.jpg"
+thumbnail: "/blog-images/placeholder.jpg"
+---
+
+## Introduction
+
+SvelteKit is a powerful framework for building web applications with Svelte. Combined with TypeScript, it provides an excellent developer experience with full type safety.
+
+### Key Features
+
+- **File-based routing** - Pages are created by adding files to the routes directory
+- **Server-side rendering** - Fast initial page loads with SSR
+- **Static site generation** - Pre-render pages at build time
+- **API routes** - Build backend endpoints alongside your frontend
+
+## Getting Started
+
+To create a new SvelteKit project, run:
+
+```bash
+npx sv create my-app
+cd my-app
+npm install
+npm run dev
+```
+
+## Code Example
+
+Here's how to create a server-side data loader with TypeScript:
+
+```typescript
+import type { PageServerLoad } from './$types';
+
+export const load: PageServerLoad = async () => {
+	return {
+		message: "Hello from SvelteKit!"
+	};
+};
+```
+
+## Why TypeScript?
+
+TypeScript adds static typing to JavaScript, which helps catch errors early and improves the development experience with better autocomplete and refactoring support.
+
+### Benefits of TypeScript with SvelteKit
+
+1. **Type Safety** - Catch errors at compile time
+2. **Better IDE Support** - Improved autocomplete and IntelliSense
+3. **Self-Documenting Code** - Types serve as inline documentation
+4. **Easier Refactoring** - Rename and restructure with confidence
+
+## Conclusion
+
+SvelteKit and TypeScript make a great combination for modern web development. The framework's simplicity combined with TypeScript's type safety creates a productive and enjoyable development experience.
+
+Try it out on your next project!

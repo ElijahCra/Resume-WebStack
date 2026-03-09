@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:24-alpine AS base
 
 FROM base AS deps
 
@@ -7,14 +7,14 @@ WORKDIR /app
 
 COPY package.json ./
 
-RUN yarn install &&  yarn upgrade
+RUN bun install &&  yarn bun
 
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-RUN yarn run build
+RUN bun run build
 
 FROM base AS runner
 WORKDIR /app

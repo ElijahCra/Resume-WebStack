@@ -1,7 +1,7 @@
 services:
-  frontend-resume:
-    container_name: nextjs
-    build: ./frontend-resume
+  frontend-svelte_frontend:
+    container_name: svelte_frontend
+    build: ./svelte_frontend
   proxy:
     container_name: "resume-proxy"
     build: ./nginx

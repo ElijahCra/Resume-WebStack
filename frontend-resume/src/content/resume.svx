@@ -1,0 +1,92 @@
+---
+name: "Elijah Crain"
+title: "Software Engineer"
+email: "elijah@example.com"
+location: "City, State"
+linkedin: "https://linkedin.com/in/elijahcrain"
+github: "https://github.com/elijahcrain"
+website: "https://elijahcrain.com"
+---
+
+## Experience
+
+### Senior Software Engineer
+**Company Name** • *Jan 2023 - Present*
+
+- Led development of a new microservices architecture using Node.js and TypeScript, improving system scalability by 300%
+- Mentored team of 5 junior developers on best practices for code quality and testing
+- Implemented CI/CD pipeline that reduced deployment time from 2 hours to 15 minutes
+- Collaborated with product team to design and launch 3 major features serving 100K+ users
+
+### Software Engineer
+**Previous Company** • *Jun 2020 - Dec 2022*
+
+- Built responsive web applications using React, TypeScript, and Tailwind CSS
+- Optimized database queries reducing average page load time by 60%
+- Developed RESTful APIs handling 10M+ requests per day
+- Participated in agile development process with 2-week sprints
+
+### Junior Developer
+**Startup Inc** • *Jan 2019 - May 2020*
+
+- Created full-stack web applications using JavaScript, Express, and PostgreSQL
+- Contributed to open-source projects and improved developer documentation
+- Fixed bugs and implemented new features based on user feedback
+
+## Education
+
+### Bachelor of Science in Computer Science
+**University Name** • *2015 - 2019*
+
+- GPA: 3.8/4.0
+- Relevant Coursework: Data Structures, Algorithms, Web Development, Database Systems
+- Dean's List: Fall 2017, Spring 2018, Fall 2018
+- Senior Project: Built a real-time collaborative code editor using WebSockets
+
+## Skills
+
+### Programming Languages
+- **Proficient:** JavaScript, TypeScript, Python, HTML, CSS
+- **Familiar:** Go, Rust, Java, SQL
+
+### Frameworks & Libraries
+- **Frontend:** React, Svelte, SvelteKit, Vue.js, Next.js
+- **Backend:** Node.js, Express, FastAPI, Django
+- **Styling:** Tailwind CSS, CSS-in-JS, Sass
+
+### Tools & Technologies
+- **Version Control:** Git, GitHub, GitLab
+- **Cloud & DevOps:** AWS, Docker, Kubernetes, CI/CD (GitHub Actions, Jenkins)
+- **Databases:** PostgreSQL, MongoDB, Redis
+- **Testing:** Jest, Vitest, Playwright, Cypress
+
+### Soft Skills
+- Strong communication and collaboration abilities
+- Problem-solving and analytical thinking
+- Agile/Scrum methodology experience
+- Technical writing and documentation
+
+## Projects
+
+### Personal Blog Platform
+*TypeScript, SvelteKit, Tailwind CSS* • [GitHub](https://github.com/example/blog)
+
+- Built a modern blog platform with MDX support for markdown content
+- Implemented server-side rendering for optimal SEO performance
+- Created responsive design with dark mode support
+- Deployed using Vercel with automatic deployments from Git
+
+### Task Management Application
+*React, Node.js, PostgreSQL* • [Live Demo](https://tasks.example.com)
+
+- Developed full-stack task management app with real-time updates
+- Implemented user authentication with JWT tokens
+- Built RESTful API with comprehensive test coverage (90%+)
+- Designed responsive UI supporting mobile, tablet, and desktop views
+
+### Open Source Contributions
+*Various Technologies*
+
+- Contributed to 10+ open-source projects including documentation improvements and bug fixes
+- Maintained a CLI tool with 500+ GitHub stars for developer productivity
+- Active participant in developer communities and technical forums

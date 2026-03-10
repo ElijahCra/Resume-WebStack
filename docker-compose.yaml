@@ -1,6 +1,6 @@
 services:
-  frontend-svelte_frontend:
-    container_name: svelte_frontend
+  frontend-resume:
+    container_name: frontend-resume
     build: ./frontend-resume
   proxy:
     container_name: "resume-proxy"
@@ -8,11 +8,14 @@ services:
     restart: always
     ports:
       - "80:80"
+    depends_on:
+      - frontend-resume
   backend-resume:
     build: ./backend-resume
     container_name: spring-server
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - POSTGRES_USER=my_user
       - POSTGRES_PASSWORD=secret
@@ -20,9 +23,8 @@ services:
       - SPRING_DATASOURCE_USERNAME=my_user
       - SPRING_DATASOURCE_PASSWORD=secret
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-
   db:
-    image: postgres:latest
+    image: postgres:16
     container_name: postgres
     environment:
       - POSTGRES_USER=my_user
@@ -30,6 +32,11 @@ services:
       - POSTGRES_DB=my_database
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U my_user -d my_database"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     volumes:
       - db-data:/var/lib/postgresql/data
 volumes:

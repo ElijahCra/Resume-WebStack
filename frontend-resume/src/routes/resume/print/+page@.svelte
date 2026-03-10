@@ -1,7 +1,5 @@
 <script lang="ts">
 	import '../../../routes/layout.css';
-	import Header from '$lib/components/Header/Header.svelte';
-	import Footer from '$lib/components/Footer/Footer.svelte';
 	import AboutMe from '$lib/components/Articles/AboutMe.svelte';
 	import ContactInformation from '$lib/components/Articles/ContactInformation.svelte';
 	import Skills from '$lib/components/Articles/Skills.svelte';
@@ -12,8 +10,6 @@
 
 <div class="print-page">
 	<div class="mx-auto max-w-8/10 px-6 mt-12">
-		<Header />
-
 		<div class="container">
 			<div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
 				<AboutMe />
@@ -38,8 +34,6 @@
 				<AdditionalInfo />
 			</div>
 		</div>
-
-		<Footer />
 	</div>
 </div>
 
@@ -52,6 +46,11 @@
 	:global(body) {
 		background-color: #ffffff !important;
 		color: #111827 !important;
+	}
+
+	/* Hide root layout nav and remove its top padding */
+	:global(nav) {
+		display: none !important;
 	}
 
 	.print-page {

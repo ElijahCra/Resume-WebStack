@@ -9,7 +9,7 @@
 
         if (!hasFetched) {
             try {
-                const response = await fetch('http://localhost:80/api/v1/new-visit', { cache: 'no-store' });
+                const response = await fetch('/api/v1/new-visit', { cache: 'no-store' });
 
                 if (!response.ok) {
                     error = 'Network response was not ok.';

@@ -39,6 +39,7 @@ export const GET: RequestHandler = async () => {
 	}
 
 	const page = await instance.newPage();
+	await page.setViewport({ width: 1280, height: 900 });
 
 	try {
 		await page.goto(printUrl, { waitUntil: 'networkidle0', timeout: 30000 });
@@ -50,7 +51,7 @@ export const GET: RequestHandler = async () => {
 			margin: { top: '0.5in', right: '0.5in', bottom: '0.5in', left: '0.5in' }
 		});
 
-		return new Response(pdfBuffer, {
+		return new Response(Buffer.from(pdfBuffer), {
 			headers: {
 				'Content-Type': 'application/pdf',
 				'Content-Disposition': 'attachment; filename="Elijah_Crain_Resume.pdf"'

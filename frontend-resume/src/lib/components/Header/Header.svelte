@@ -2,7 +2,7 @@
     import { personal } from '$content';
     import { fullName } from '$lib/helpers/utils';
     import Heading from '$lib/components/Heading/Heading.svelte';
-    //import PDFDownloadButton from '$lib/components/PDF/PDFDownloadButton.svelte';
+    import PDFDownloadButton from '$lib/components/PDF/PDFDownloadButton.svelte';
 
     let { secret = undefined }: { secret?: string } = $props();
 </script>
@@ -16,7 +16,7 @@
                     {personal.title}
                 </Heading>
             </div>
-            <!-- <PDFDownloadButton {secret} /> -->
+            <PDFDownloadButton {secret} />
         </div>
     </div>
 </div>

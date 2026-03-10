@@ -14,11 +14,21 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
+# Install Chromium and fonts for PDF generation
+RUN apk add --no-cache chromium nss freetype harfbuzz ca-certificates ttf-freefont font-noto
+
+ENV CHROMIUM_PATH=/usr/bin/chromium-browser
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
 RUN addgroup --system --gid 1001 sveltekit
 RUN adduser --system --uid 1001 sveltekit
 
 COPY --from=builder --chown=sveltekit:sveltekit /app/build ./build
 COPY --from=builder --chown=sveltekit:sveltekit /app/package.json ./
+COPY --from=builder --chown=sveltekit:sveltekit /app/bun.lock ./
+
+# Install production dependencies (puppeteer-core needed at runtime)
+RUN bun install --frozen-lockfile --production
 
 USER sveltekit
 

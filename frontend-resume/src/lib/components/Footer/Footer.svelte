@@ -32,7 +32,7 @@
         </div>
 
         <div class="mt-1 text-sm">
-          This resume was generated with <a class="link" href="https://svelte.dev/">SvelteKit</a> and deployed on <a class="link" href="https://vercel.com/">Vercel</a>.
+          This resume was generated with <a class="link" href="https://svelte.dev/">SvelteKit</a> and deployed on <a class="link" href="https://aws.amazon.com/">AWS</a>.
         </div>
     </div>
 </footer>

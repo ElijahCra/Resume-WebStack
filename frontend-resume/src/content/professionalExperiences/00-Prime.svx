@@ -1,12 +1,14 @@
 ---
 title: Software Engineer
-organization: Aflac
-startDate: September 2022
+organization: Prime Therapeutics
+startDate: November 2024
 ---
 
-- Modernized legacy enrollment data distribution system for four customer management systems by establishing a micro-service architecture. Improved response time by 65\%, enhancing integration and distribution of data in real-time.
-- Streamed data using Kafka (MSK) cluster and managed consumer groups for horizontal scaling. Achieved a 100\% message delivery success rate withstanding peak loads of over 250,000 requests per day.
-- Developed servers with Spring Boot and Maven that provided REST APIs, Kafka publishers and consumers as well as direct database updates.
-- Secured services with OAuth 2.0 tokens, implemented automated API call retries, and protected downstream endpoints with circuit breaking.
-- Configured AWS lambdas with MSK event sources to transform data through DynamoDB tables. Utilized DynamoDB streams to trigger lambdas to post updates back to Kafka.
-- Improved CI/CD to create docker containers for upload to AWS ECR and deployment using cloud formation. Created a comprehensive suite for unit and integration testing, providing 90\% code coverage. Logged progress using Splunk and saved failed messages to S3.
+- Managed and executed upgrades for Confluence and Jira instances, including secure file transfer (SCP), patch application, and comprehensive post-upgrade testing to ensure system stability and functionality.
+- Optimized and extended GitHub Actions and GitHub Workflows across the organization to enhance continuous integration (CI), continuous delivery (CD), and security scanning processes. Implemented functionality to support provenance and attestation for software supply chain security.
+- Implemented system to push and pull docker images from AWS Elastic container registry (ECR) for scanning with grype for optura ai support
+- Implemented ec2 deployment stuff with ec2 templates and aws codepipeline support
+- Github activity management with automated removal requests through serviceNow to maintain license count for active users only
+- dynatrace monitoring and alerts for servers / github runners
+- Diagnosed and resolved critical server performance bottlenecks by utilizing system monitoring tools (htop) to identify memory limitations. Successfully coordinated upgrades to server memory and Java heap sizes, resulting in improved system stability and performance.
+- Engineered and deployed a React application to Google Kubernetes Engine (GKE), integrating with Confluent Cloud to centralize and visualize Kafka cluster and topic information.

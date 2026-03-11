@@ -2,6 +2,7 @@
 title: Software Engineer
 organization: Aflac
 startDate: September 2022
+endDate: November 2024
 ---
 
 - Modernized legacy enrollment data distribution system for four customer management systems by establishing a micro-service architecture. Improved response time by 65\%, enhancing integration and distribution of data in real-time.

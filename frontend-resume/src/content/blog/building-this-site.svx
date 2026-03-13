@@ -1,0 +1,176 @@
+---
+title: "Building a Full-Stack Resume Site with SvelteKit, Spring Boot, and Nginx"
+date: "2026-03-13"
+description: "A deep dive into the architecture behind this site — a containerized full-stack application using SvelteKit for the frontend, Spring Boot and PostgreSQL for the backend, and Nginx as a reverse proxy."
+tags: ["svelte", "spring-boot", "docker", "nginx", "full-stack", "architecture"]
+categories: ["Web Development", "Architecture"]
+author: "Elijah Crain"
+published: true
+coverImage: "/blog-images/placeholder.jpg"
+thumbnail: "/blog-images/placeholder.jpg"
+---
+
+## Why Build a Resume Site from Scratch?
+
+There are plenty of website builders and templates out there, but none of them let you show what you can actually do. This site is the resume — a working demonstration of full-stack development, containerization, and infrastructure. Every layer, from the frontend to the database, is something I built and configured myself.
+
+The stack: **SvelteKit** on the frontend, **Spring Boot** with **PostgreSQL** on the backend, **Nginx** as a reverse proxy, and **Docker Compose** tying it all together.
+
+## The Frontend: SvelteKit + Tailwind CSS
+
+The frontend is built with [SvelteKit 2](https://svelte.dev/) and TypeScript. SvelteKit gives you file-based routing, server-side rendering, and a great developer experience out of the box. Paired with Svelte 5's runes syntax (`$props()`, `$derived()`, `$state()`), components are clean and reactive without the boilerplate you'd find in other frameworks.
+
+### Styling with Tailwind CSS 4
+
+Tailwind CSS 4 handles all the styling through the `@tailwindcss/vite` plugin — no separate config file needed. The site supports **light and dark themes** via a custom Svelte store that syncs with `localStorage` and applies a `.dark` class to the document root. All the theme colors are defined as CSS custom properties, so switching themes is instant and flicker-free.
+
+```css
+/* Theme colors defined as custom properties */
+@theme {
+  --color-heading: var(--heading);
+  --color-body: var(--body);
+  --color-surface: var(--surface);
+  --color-accent: var(--accent);
+  /* ... */
+}
+```
+
+### The Blog System
+
+The blog you're reading right now is powered by [mdsvex](https://mdsvex.pngwn.io/), which lets me write posts as `.svx` files — Markdown with full Svelte component support. Each post has YAML frontmatter for metadata like title, date, tags, and categories.
+
+Posts are loaded at build time using Vite's `import.meta.glob`:
+
+```typescript
+// Eager loading for listings
+const modules = import.meta.glob('/src/content/blog/*.svx', { eager: true });
+
+// Lazy loading for individual posts
+const modules = import.meta.glob('/src/content/blog/*.svx');
+```
+
+The blog listing page uses server-side loading to filter and sort published posts. Individual post pages use client-side dynamic imports so the full post component (including any embedded Svelte components) renders correctly. Related posts are suggested based on shared tags and categories, scored by relevance.
+
+### Resume Content
+
+The resume itself is also written in `.svx` format. Professional experiences, skills, and achievements are structured as separate content files, each rendered by dedicated Svelte components. This means updating my resume is as simple as editing a Markdown file — no design work required.
+
+## The Backend: Spring Boot + PostgreSQL
+
+The backend is a **Spring Boot 3** application running on **Java 21**. Right now its primary job is tracking site visits, but the architecture is set up to support additional features down the road.
+
+### How Visit Tracking Works
+
+When you loaded this page, the frontend made a request to `/api/v1/new-visit`. That request gets proxied through Nginx to the Spring Boot server, which increments a running total in PostgreSQL and returns the updated count. The frontend caches the result in `sessionStorage` so refreshing the page doesn't inflate the numbers.
+
+```java
+public Visit getSiteVisit() {
+    Visit visit = getBaseSiteVisit();
+    visit.setTotal_visit(visit.getTotal_visit() + 1);
+    return visitRepository.save(visit);
+}
+```
+
+The backend follows a standard layered architecture:
+- **Controller** → handles HTTP requests and CORS
+- **Service** → business logic
+- **Repository** → Spring Data JPA interface for database access
+- **Entity/DTO** → data model with JPA annotations
+
+Database migrations are managed by **Flyway**, so schema changes are versioned and repeatable. The app connects to a **PostgreSQL 16** instance that persists its data via a Docker volume.
+
+## Nginx: The Reverse Proxy
+
+Nginx sits in front of everything and routes traffic:
+
+```nginx
+upstream frontend-resume {
+    server frontend-resume:3000;
+}
+upstream backend-resume {
+    server backend-resume:8080;
+}
+
+server {
+    listen 80;
+
+    location / {
+        proxy_pass http://frontend-resume;
+    }
+
+    location /api/v1/new-visit {
+        proxy_pass http://backend-resume;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+All requests hit port 80 on the Nginx container. Anything under `/api/v1/` goes to the Spring Boot backend. Everything else goes to SvelteKit. This keeps the frontend and backend fully decoupled — they don't even need to know each other's ports.
+
+## Docker Compose: Bringing It All Together
+
+The entire stack runs with a single `docker compose up`. Four services, four containers:
+
+1. **frontend-resume** — SvelteKit app served by Bun on port 3000
+2. **backend-resume** — Spring Boot API on port 8080
+3. **db** — PostgreSQL 16 with a health check and persistent volume
+4. **proxy** — Nginx on port 80, depends on the frontend
+
+Each service uses a multi-stage Dockerfile to keep images small. The frontend build, for example, has three stages: install dependencies, build the app, and copy only the production output into a minimal Alpine image. The backend does something similar with Maven and the Temurin JRE.
+
+```yaml
+services:
+  frontend-resume:
+    build: ./frontend-resume
+    container_name: frontend-resume
+
+  backend-resume:
+    build: ./backend-resume
+    container_name: spring-server
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-LINE", "pg_isready"]
+
+  proxy:
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend-resume
+```
+
+The `depends_on` with `service_healthy` on the database means Spring Boot won't start until PostgreSQL is actually ready to accept connections — no more race conditions on startup.
+
+## What I Learned
+
+Building this project end-to-end reinforced a few things:
+
+- **SvelteKit is a joy to work with.** File-based routing, built-in SSR, and Svelte 5's runes make frontend development fast and intuitive. The mdsvex integration for blog content is particularly elegant.
+
+- **Docker Compose simplifies multi-service deployments.** Defining the entire stack in one file — with health checks, volumes, and dependency ordering — makes the gap between local development and production much smaller.
+
+- **Nginx as a reverse proxy is the right default.** It cleanly separates concerns, handles routing, and can be extended with SSL termination, rate limiting, or caching without touching application code.
+
+- **Keep it simple.** The visit counter is a small feature, but it touches every layer of the stack — frontend component, API proxy, REST endpoint, service logic, database persistence. That's a full vertical slice through a production architecture.
+
+## What's Next
+
+There's always more to build. A few things on the roadmap:
+
+- **SSL/TLS** with Let's Encrypt for HTTPS
+- **CI/CD pipeline** for automated builds and deployments
+- **More blog content** covering specific technical topics
+- **Daily visit tracking** to supplement the running total
+
+If you've made it this far, thanks for reading. The source code for this entire project is available on my GitHub.

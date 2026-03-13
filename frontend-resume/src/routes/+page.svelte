@@ -1,26 +1,37 @@
-<script>
-	import PageVisit from '$lib/components/PageVisit/PageVisit.svelte';
+<script lang="ts">
+	import BlogCardSmall from '$lib/components/BlogCardSmall.svelte';
+	import type { PageData } from './$types';
+
+	let { data }: { data: PageData } = $props();
 </script>
 
-<div class="flex h-screen-adjusted flex-col items-center justify-center gap-8 p-8">
-	<div class="flex gap-8">
-	<a
-		href="/blog"
-		class="group flex h-64 w-64 items-center justify-center rounded-lg bg-linear-to-br from-blue-500 to-purple-600 shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl shadow-gray-400 dark:shadow-gray-700"
-	>
-		<span class="text-3xl font-bold text-heading transition-transform group-hover:scale-110">
-			Blog
-		</span>
-	</a>
+<div class="flex min-h-screen-adjusted flex-col items-center gap-8 p-8">
+	{#if data.recentPosts.length > 0}
+		<section class="w-full max-w-5xl">
+			<h2 class="mb-6 text-2xl font-bold text-heading">Recent Posts</h2>
+			<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				{#each data.recentPosts as post (post.slug)}
+					<BlogCardSmall {post} />
+				{/each}
+			</div>
+			<div class="mt-6 flex gap-4">
+				<a
+					href="/blog"
+					class="flex flex-1 items-center justify-between rounded-lg border border-border px-5 py-4 transition-colors hover:bg-surface-hover"
+				>
+					<span class="font-semibold text-heading">All Posts</span>
+					<span class="text-muted">→</span>
+				</a>
+				<a
+					href="/resume"
+					class="flex flex-1 items-center justify-between rounded-lg border border-border px-5 py-4 transition-colors hover:bg-surface-hover"
+				>
+					<span class="font-semibold text-heading">Resume</span>
+					<span class="text-muted">→</span>
+				</a>
+			</div>
+		</section>
+	{/if}
 
-	<a
-		href="/resume"
-		class="group flex h-64 w-64 items-center justify-center rounded-lg bg-linear-to-br from-green-500 to-teal-600 shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl shadow-gray-400 dark:shadow-gray-700"
-	>
-		<span class="text-3xl font-bold text-heading transition-transform group-hover:scale-110">
-			Resume
-		</span>
-	</a>
-	</div>
-	<PageVisit />
+
 </div>

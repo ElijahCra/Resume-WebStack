@@ -15,8 +15,8 @@
 
 <div class="mx-auto max-w-7xl px-6 py-12">
 	<header class="mb-12">
-		<h1 class="mb-4 text-4xl font-bold text-gray-900 dark:text-gray-100">Blog</h1>
-		<p class="text-lg text-gray-600 dark:text-gray-400">
+		<h1 class="mb-4 text-4xl font-bold text-heading">Blog</h1>
+		<p class="text-lg text-body">
 			{data.totalCount}
 			{data.totalCount === 1 ? 'post' : 'posts'} published
 		</p>
@@ -24,7 +24,7 @@
 
 	{#if data.posts.length === 0}
 		<div class="py-12 text-center">
-			<p class="text-xl text-gray-500 dark:text-gray-400">No posts published yet. Check back soon!</p>
+			<p class="text-xl text-muted">No posts published yet. Check back soon!</p>
 		</div>
 	{:else}
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

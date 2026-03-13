@@ -7,7 +7,7 @@
     const currentYear = new Date().getFullYear();
 </script>
 
-<footer class="bg-neutral-3 mt-12 py-2 text-neutral-12">
+<footer class="bg-neutral-3 py-2 text-neutral-12">
     <div class="container text-center">
         {#if links && links.length > 0}
             <div class="flex justify-center">

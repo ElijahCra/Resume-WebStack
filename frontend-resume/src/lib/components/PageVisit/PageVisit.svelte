@@ -39,13 +39,34 @@
             sessionStorage.setItem('visitCount', visitCount.toString());
         }
     });
+
+    const formatted = $derived(visitCount?.toLocaleString() ?? null);
 </script>
 
-<div>
-    <h2 class="text-accent-11">Website Visits:</h2>
-    {#if visitCount === null}
-        <p>{error ? error : "Loading..."}</p>
+<div class="flex items-center gap-3 rounded-lg border border-separator bg-card px-5 py-3 text-sm">
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="text-muted shrink-0"
+    >
+        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+        <circle cx="12" cy="12" r="3" />
+    </svg>
+
+    {#if error}
+        <span class="text-muted">—</span>
+    {:else if formatted === null}
+        <span class="text-muted animate-pulse">···</span>
     {:else}
-        <p>{visitCount}</p>
+        <span class="font-semibold text-heading">{formatted}</span>
     {/if}
+
+    <span class="text-muted">site visits</span>
 </div>

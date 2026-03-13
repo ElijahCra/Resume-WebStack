@@ -43,22 +43,22 @@
 		<div class="mb-6 flex flex-wrap gap-2">
 			{#each data.post.frontmatter.categories as category}
 				<span
-					class="inline-block rounded-full bg-purple-100 px-4 py-1 text-sm font-medium text-purple-800 dark:bg-purple-900 dark:text-purple-200"
+					class="inline-block rounded-full bg-category-bg px-4 py-1 text-sm font-medium text-category-text"
 				>
 					{category}
 				</span>
 			{/each}
 		</div>
 
-		<h1 class="mb-4 text-4xl font-bold text-gray-900 dark:text-gray-100 md:text-5xl">
+		<h1 class="mb-4 text-4xl font-bold text-heading md:text-5xl">
 			{data.post.frontmatter.title}
 		</h1>
 
-		<p class="mb-6 text-xl text-gray-600 dark:text-gray-400">
+		<p class="mb-6 text-xl text-body">
 			{data.post.frontmatter.description}
 		</p>
 
-		<div class="flex items-center gap-4 text-gray-600 dark:text-gray-400">
+		<div class="flex items-center gap-4 text-body">
 			<span class="font-medium">{data.post.frontmatter.author}</span>
 			<span>•</span>
 			<time datetime={data.post.frontmatter.date}>
@@ -68,7 +68,7 @@
 
 		<div class="mt-4 flex flex-wrap gap-2">
 			{#each data.post.frontmatter.tags as tag}
-				<span class="inline-block rounded bg-gray-100 px-3 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+				<span class="inline-block rounded bg-badge-bg px-3 py-1 text-sm text-badge-text">
 					#{tag}
 				</span>
 			{/each}
@@ -77,27 +77,19 @@
 
 	<!-- Article Content with Typography Plugin -->
 	<div
-		class="prose prose-lg prose-slate max-w-none
-		prose-headings:font-bold prose-headings:text-gray-900
-		prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
-		prose-code:rounded prose-code:bg-gray-100 prose-code:px-1 prose-code:text-pink-600
-		prose-pre:bg-gray-900 prose-pre:text-gray-100
-		prose-img:rounded-lg prose-img:shadow-lg
-		dark:prose-headings:text-gray-100
-		dark:prose-a:text-blue-400 dark:hover:prose-a:text-blue-300
-		dark:prose-code:bg-gray-800 dark:prose-code:text-pink-400
-		dark:prose-pre:bg-gray-950
-		dark:prose-strong:text-gray-200
-		dark:text-gray-300"
+		class="prose prose-lg max-w-none
+		prose-headings:font-bold
+		prose-a:no-underline hover:prose-a:underline
+		prose-img:rounded-lg prose-img:shadow-lg"
 	>
 		<PostComponent />
 	</div>
 
 	<!-- Back to Blog Link -->
-	<div class="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
+	<div class="mt-12 border-t border-separator pt-8">
 		<a
 			href="/blog"
-			class="inline-flex items-center font-medium text-blue-600 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+			class="inline-flex items-center font-medium text-accent transition-colors hover:text-accent-hover"
 		>
 			<svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 				<path
@@ -114,8 +106,8 @@
 
 <!-- Related Posts Section -->
 {#if data.relatedPosts && data.relatedPosts.length > 0}
-	<section class="mx-auto max-w-7xl bg-gray-50 px-6 py-12 dark:bg-gray-900">
-		<h2 class="mb-8 text-3xl font-bold text-gray-900 dark:text-gray-100">Related Posts</h2>
+	<section class="mx-auto max-w-7xl bg-surface px-6 py-12">
+		<h2 class="mb-8 text-3xl font-bold text-heading">Related Posts</h2>
 
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 			{#each data.relatedPosts as post (post.slug)}

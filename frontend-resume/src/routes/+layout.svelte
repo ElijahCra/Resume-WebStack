@@ -5,6 +5,8 @@
 	import { theme } from '$lib/stores/theme';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
+	import PageVisit from '$lib/components/PageVisit/PageVisit.svelte';
+
 
 	let { children } = $props();
 
@@ -32,42 +34,42 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<nav class="fixed top-0 left-0 right-0 bg-surface-alternate shadow-md nav-height dark:shadow-gray-900/30">
+<nav class="fixed top-0 left-0 right-0 bg-surface-alt shadow-md shadow-nav-shadow nav-height">
 	<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-		<a href="/" class="text-xl font-bold text-link-muted transition-colors">
+		<a href="/" class="text-xl font-bold text-heading transition-colors hover:text-body">
 			elijahcrain.com
 		</a>
 
 		<div class="flex items-center gap-6">
 			<a
 				href="/"
-				class="text-link font-medium transition-colors  {page.url.pathname === '/' ? 'text-blue-600 border-b-2 border-blue-600 dark:text-blue-400 dark:border-blue-400' : ''}"
+				class="text-link font-medium transition-colors hover:text-accent {page.url.pathname === '/' ? 'text-accent border-b-2 border-accent' : ''}"
 			>
 				Home
 			</a>
 			<a
 				href="/blog"
-				class="text-link font-medium transition-colors {page.url.pathname.startsWith('/blog') ? 'text-blue-600 border-b-2 border-blue-600 dark:text-blue-400 dark:border-blue-400' : ''}"
+				class="text-link font-medium transition-colors hover:text-accent {page.url.pathname.startsWith('/blog') ? 'text-accent border-b-2 border-accent' : ''}"
 			>
 				Blog
 			</a>
 			<a
 				href="/resume"
-				class="text-gray-700 font-medium transition-colors hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 {page.url.pathname === '/resume' ? 'text-blue-600 border-b-2 border-blue-600 dark:text-blue-400 dark:border-blue-400' : ''}"
+				class="text-link font-medium transition-colors hover:text-accent {page.url.pathname === '/resume' ? 'text-accent border-b-2 border-accent' : ''}"
 			>
 				Resume
 			</a>
 
 			<!-- Theme Toggle -->
-			<div class="flex gap-1 rounded-lg bg-gray-100 p-1 dark:bg-gray-800">
+			<div class="flex gap-2 rounded-lg p-1">
 				<button
 					onclick={() => theme.setTheme('light')}
-					class="rounded-md p-2 transition-colors {$theme === 'light'
-						? 'bg-white text-blue-600 shadow-sm dark:bg-gray-700 dark:text-blue-400'
-						: 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'}"
+					class="rounded-md bg-toggle-light-bg p-2 transition-all {$theme === 'light'
+						? 'ring-2 ring-toggle-light-ring ring-offset-2'
+						: ''}"
 					aria-label="Light mode"
 				>
-					<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg class="h-5 w-5 stroke-toggle-light-icon" fill="none" viewBox="0 0 24 24">
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -78,12 +80,12 @@
 				</button>
 				<button
 					onclick={() => theme.setTheme('dark')}
-					class="rounded-md p-2 transition-colors {$theme === 'dark'
-						? 'bg-white text-blue-600 shadow-sm dark:bg-gray-700 dark:text-blue-400'
-						: 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'}"
+					class="rounded-md bg-toggle-dark-bg p-2 transition-all {$theme === 'dark'
+						? 'ring-2 ring-toggle-dark-ring ring-offset-2'
+						: ''}"
 					aria-label="Dark mode"
 				>
-					<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg class="h-5 w-5 stroke-toggle-dark-icon" fill="none" viewBox="0 0 24 24">
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -93,6 +95,7 @@
 					</svg>
 				</button>
 			</div>
+			<PageVisit />
 		</div>
 	</div>
 </nav>

@@ -12,7 +12,7 @@
     } = $props();
 </script>
 
-<div class="flex w-full items-center gap-2" class:border-b-2={level === 2} class:border-neutral-4={level === 2} class:justify-center={level===2}>
+<div class="flex w-full items-center gap-2 my-2" class:border-b-2={level === 2} class:border-neutral-4={level === 2} class:justify-center={level===2}>
     <Icon class="h-6 w-6" />
 
     {#if level === 1}

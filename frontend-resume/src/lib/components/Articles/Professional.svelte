@@ -6,8 +6,8 @@
     import { sortedProfessionalExperiences } from '$lib/helpers/utils';
 </script>
 
-<article class="rounded-xl bg-neutral-3 mt-12">
-    <div class="container">
+<article class="rounded-xl bg-neutral-3">
+    <div class="px-6">
         <div class="flex justify-center text-center">
             <SectionHeading
                     Icon={Briefcase}

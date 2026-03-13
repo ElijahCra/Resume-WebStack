@@ -6,7 +6,7 @@
 </script>
 
 <div
-    class={twMerge('prose mt-2 text-base text-neutral-12 [&>p]:mb-2', className)}
+    class={twMerge('prose max-w-[98%] mx-auto mt-2 text-base text-neutral-12 [&>p]:mb-2', className)}
 >
     <Component />
 </div>

@@ -13,29 +13,29 @@
 <Header />
 
 <div class="container">
-	<div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+	<div class="my-6 grid grid-cols-1 gap-6 md:grid-cols-2">
 		<AboutMe />
 		<div class="flex justify-center">
 			<ContactInformation />
 		</div>
-
 	</div>
 
-	<div class="mt-10">
+	<div class="mt-6 mb-4">
 		<Skills />
 	</div>
 
-	<div class="mt-10">
+	<div class="my-4">
 		<Professional />
 	</div>
 
-	<div class="mt-10">
+	<div class="my-6">
 		<Achievements />
 	</div>
 
-	<div class="mt-10">
+	<div class="my-6">
 		<AdditionalInfo />
 	</div>
+
 </div>
 
 <Footer />

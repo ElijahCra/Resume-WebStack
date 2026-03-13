@@ -14,7 +14,7 @@
     } = $props();
 </script>
 
-<article class="first-of-type:mt-10">
+<article class="first-of-type:mt-6">
     <Heading class="text-balance" level={3}>
         <span class="rounded-md bg-neutral-12 px-2 text-neutral-1">
             {title}

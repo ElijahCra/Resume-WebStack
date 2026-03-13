@@ -9,6 +9,6 @@ startDate: November 2024
 - Implemented system to push and pull docker images from AWS Elastic container registry (ECR) for scanning with grype for optura ai support
 - Implemented ec2 deployment stuff with ec2 templates and aws codepipeline support
 - Github activity management with automated removal requests through serviceNow to maintain license count for active users only
-- dynatrace monitoring and alerts for servers / github runners
+- Dynatrace monitoring and alerts for servers / github runners
 - Diagnosed and resolved critical server performance bottlenecks by utilizing system monitoring tools (htop) to identify memory limitations. Successfully coordinated upgrades to server memory and Java heap sizes, resulting in improved system stability and performance.
 - Engineered and deployed a React application to Google Kubernetes Engine (GKE), integrating with Confluent Cloud to centralize and visualize Kafka cluster and topic information.

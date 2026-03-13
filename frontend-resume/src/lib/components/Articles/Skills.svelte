@@ -7,13 +7,14 @@
 </script>
 
 <article>
-    <SectionHeading
-            Icon={Check}
-            level={3}
-            text="Skills & Expertise"
-    />
 
-    <div class="mt-2 grid grid-flow-row gap-6 lg:grid-flow-col">
+        <SectionHeading
+                Icon={Check}
+                level={3}
+                text="Skills & Expertise"
+        />
+
+    <div class="grid grid-flow-row gap-6 lg:grid-flow-col">
         {#each allSkills as skill (skill._id)}
             <div>
                 <Heading level={4}>

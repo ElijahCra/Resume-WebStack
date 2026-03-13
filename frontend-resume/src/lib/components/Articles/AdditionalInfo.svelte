@@ -5,7 +5,7 @@
     import SectionHeading from '$lib/components/SectionHeading/SectionHeading.svelte';
 </script>
 
-<article class="mt-10">
+<article>
     <div class="mb-6 flex justify-center">
         <SectionHeading
                 Icon={Paintbrush}

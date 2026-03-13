@@ -5,7 +5,7 @@
     import AchievementItem from './AchievementItem.svelte';
 </script>
 
-<article class="rounded-xl bg-neutral-3 mt-12">
+<article class="rounded-xl bg-neutral-3">
     <div class="container ">
         <div class="flex justify-center text-center ">
             <SectionHeading

@@ -31,6 +31,7 @@
 	<!-- Article Header -->
 	<header class="mb-12">
 		{#if data.post.frontmatter.coverImage}
+			<!--
 			<div class="mb-8 aspect-video overflow-hidden rounded-lg">
 				<img
 					src={data.post.frontmatter.coverImage}
@@ -38,6 +39,7 @@
 					class="h-full w-full object-cover"
 				/>
 			</div>
+			-->
 		{/if}
 
 		<div class="mb-6 flex flex-wrap gap-2">

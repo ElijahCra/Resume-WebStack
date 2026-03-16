@@ -6,8 +6,8 @@ tags: ["svelte", "spring-boot", "docker", "nginx", "full-stack", "architecture"]
 categories: ["Web Development", "Architecture"]
 author: "Elijah Crain"
 published: true
-coverImage: "/blog-images/placeholder.jpg"
-thumbnail: "/blog-images/placeholder.jpg"
+coverImage: "/blog-images/stack.png"
+thumbnail: "/blog-images/stack.png"
 ---
 
 ## Why Build a Resume Site from Scratch?
@@ -18,21 +18,74 @@ The stack: **SvelteKit** on the frontend, **Spring Boot** with **PostgreSQL** on
 
 ## The Frontend: SvelteKit + Tailwind CSS
 
-The frontend is built with [SvelteKit 2](https://svelte.dev/) and TypeScript. SvelteKit gives you file-based routing, server-side rendering, and a great developer experience out of the box. Paired with Svelte 5's runes syntax (`$props()`, `$derived()`, `$state()`), components are clean and reactive without the boilerplate you'd find in other frameworks.
+The frontend is built with [SvelteKit 2](https://svelte.dev/) and TypeScript. SvelteKit gives you file-based routing, server-side rendering, and a great developer experience out of the box. Paired with Svelte 5's runes syntax, components are clean and reactive without the boilerplate you'd find in other frameworks.
 
-### Styling with Tailwind CSS 4
+### Svelte 5 Runes in Practice: The Page Visit Counter
 
-Tailwind CSS 4 handles all the styling through the `@tailwindcss/vite` plugin — no separate config file needed. The site supports **light and dark themes** via a custom Svelte store that syncs with `localStorage` and applies a `.dark` class to the document root. All the theme colors are defined as CSS custom properties, so switching themes is instant and flicker-free.
+The best way to explain Svelte 5 runes is to look at a real component. The visit counter you see on this site is a good example because it uses `$state`, `$derived`, and `$effect` — three of the core runes.
 
-```css
-/* Theme colors defined as custom properties */
-@theme {
-  --color-heading: var(--heading);
-  --color-body: var(--body);
-  --color-surface: var(--surface);
-  --color-accent: var(--accent);
-  /* ... */
-}
+```svelte
+<script lang="ts">
+    import { onMount } from 'svelte';
+
+    let visitCount: number | null = $state(null);
+    let error: string | null = $state(null);
+
+    onMount(async () => {
+        const hasFetched = sessionStorage.getItem('hasFetchedVisitCount');
+
+        if (!hasFetched) {
+            try {
+                const response = await fetch('/api/v1/new-visit', { cache: 'no-store' });
+                if (!response.ok) {
+                    error = 'Network response was not ok.';
+                    return;
+                }
+                const data = await response.json();
+                if (data.total_visit !== undefined) {
+                    visitCount = data.total_visit;
+                } else {
+                    error = 'Total_visit property not found in response';
+                }
+            } catch (err) {
+                console.error('Error fetching visit count:', err);
+                error = err instanceof Error ? err.message : String(err);
+            } finally {
+                sessionStorage.setItem('hasFetchedVisitCount', 'true');
+            }
+        } else {
+            visitCount = parseInt(sessionStorage.getItem('visitCount') ?? '', 10) || null;
+        }
+    });
+
+    $effect(() => {
+        if (visitCount !== null) {
+            sessionStorage.setItem('visitCount', visitCount.toString());
+        }
+    });
+
+    const formatted = $derived(visitCount?.toLocaleString() ?? null);
+</script>
+```
+
+Here's what each rune does:
+
+- **`$state(null)`** declares reactive state. When `visitCount` or `error` changes, Svelte automatically updates any part of the template that references them. In older Svelte, you'd just use `let` and the compiler would figure it out — runes make reactivity explicit and work consistently inside and outside components.
+
+- **`$effect(() => { ... })`** runs a side effect whenever its dependencies change. Here, every time `visitCount` updates, the effect syncs the value to `sessionStorage`. This replaces the old `$:` reactive statement syntax. The key difference is that `$effect` tracks its dependencies automatically at runtime — if `visitCount` is `null`, the body doesn't run and no subscription is created.
+
+- **`$derived(...)`** creates a computed value that updates when its dependencies change. `formatted` recalculates whenever `visitCount` changes, applying `toLocaleString()` for number formatting (e.g., `1234` becomes `"1,234"`). It's the runes equivalent of `$: formatted = ...` but with clearer semantics.
+
+The template then uses these reactive values with Svelte's `{#if}` blocks to show a loading indicator, the formatted count, or an error state:
+
+```svelte
+{#if error}
+    <span class="text-muted">—</span>
+{:else if formatted === null}
+    <span class="text-muted animate-pulse">···</span>
+{:else}
+    <span class="font-semibold text-heading">{formatted}</span>
+{/if}
 ```
 
 ### The Blog System
@@ -59,9 +112,31 @@ The resume itself is also written in `.svx` format. Professional experiences, sk
 
 The backend is a **Spring Boot 3** application running on **Java 21**. Right now its primary job is tracking site visits, but the architecture is set up to support additional features down the road.
 
-### How Visit Tracking Works
+### The Full API Call: From Click to Database and Back
 
-When you loaded this page, the frontend made a request to `/api/v1/new-visit`. That request gets proxied through Nginx to the Spring Boot server, which increments a running total in PostgreSQL and returns the updated count. The frontend caches the result in `sessionStorage` so refreshing the page doesn't inflate the numbers.
+The visit counter is a small feature, but tracing a single request through the stack shows how all the pieces connect. Here's what happens when you load a page on this site:
+
+**Step 1 — The frontend calls the API.** Inside the `PageVisit` component, `onMount` fires a `fetch` to `/api/v1/new-visit`. This is a relative URL — the browser sends it to whatever host served the page. No hardcoded backend URLs anywhere in the frontend code.
+
+```typescript
+const response = await fetch('/api/v1/new-visit', { cache: 'no-store' });
+```
+
+**Step 2 — Nginx routes the request.** The request hits the Nginx reverse proxy on port 80. Nginx matches the `/api/v1/new-visit` location block and forwards it to the `backend-resume` upstream (Spring Boot on port 8080). The frontend never talks to the backend directly — Nginx handles the routing, which means the frontend doesn't need to know the backend's port, hostname, or even that a separate service exists.
+
+**Step 3 — Spring Boot handles the request.** The `VisitController` receives the `GET` request at `/api/v1/new-visit` and delegates to the service layer:
+
+```java
+@GetMapping("/new-visit")
+ResponseEntity<Visit> newVisit(){
+    log.info("newVisit called at /new-visit");
+    HttpHeaders headers = new HttpHeaders();
+    headers.add("Access-Control-Allow-Origin", "*");
+    return new ResponseEntity<>(visitService.getSiteVisit(), headers, HttpStatus.OK);
+}
+```
+
+**Step 4 — The service layer updates the database.** `VisitService` retrieves the base visit record from PostgreSQL, increments the total, and saves it back. Spring Data JPA handles the SQL — the repository interface extends `ListCrudRepository`, so standard CRUD operations are generated automatically.
 
 ```java
 public Visit getSiteVisit() {
@@ -71,11 +146,15 @@ public Visit getSiteVisit() {
 }
 ```
 
+**Step 5 — The response flows back.** The updated `Visit` entity is serialized to JSON and sent back through Nginx to the browser. The frontend receives `{ "total_visit": 1234, ... }`, updates `visitCount` via `$state`, which triggers `$derived` to reformat the number and `$effect` to cache it in `sessionStorage`.
+
+**Step 6 — Subsequent visits skip the API.** On page refreshes or navigation within the same session, the component checks `sessionStorage` first. If the count was already fetched, it reads the cached value instead of hitting the API again. This prevents a single user from inflating the count by refreshing.
+
 The backend follows a standard layered architecture:
-- **Controller** → handles HTTP requests and CORS
-- **Service** → business logic
-- **Repository** → Spring Data JPA interface for database access
-- **Entity/DTO** → data model with JPA annotations
+- **Controller** → handles HTTP requests and CORS headers
+- **Service** → business logic (increment count, retrieve records)
+- **Repository** → Spring Data JPA interface — no SQL needed for basic operations
+- **Entity/DTO** → data model with JPA annotations and Lombok for boilerplate
 
 Database migrations are managed by **Flyway**, so schema changes are versioned and repeatable. The app connects to a **PostgreSQL 16** instance that persists its data via a Docker volume.
 

@@ -2,4 +2,4 @@
 title: Tools
 ---
 
-Postman, Linux, IntelliJ, Eclipse, Dynamics 365
+CMake, Maven, Gradle, Postman, Linux, IntelliJ, Eclipse, Dynamics 365, Jira, Confluence

@@ -6,4 +6,4 @@ location: Columbus, OH
 twitterUsername:
 ---
 
-I am a software engineer with a passion for film photography, robotics, 3D design and 3D printing, game theory and anything else involving computationally intense problems.
+I am a software engineer with a passion for film photography, robotics, 3D design and 3D printing, CNC manufacturing, game theory, programming, and learning new things!.

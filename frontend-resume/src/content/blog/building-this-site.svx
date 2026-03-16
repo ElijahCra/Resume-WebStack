@@ -12,7 +12,7 @@ thumbnail: "/blog-images/stack.png"
 
 ## Why Build a Resume Site from Scratch?
 
-There are plenty of website builders and templates out there, but none of them let you show what you can actually do. This site is the resume — a working demonstration of full-stack development, containerization, and infrastructure. Every layer, from the frontend to the database, is something I built and configured myself.
+There are plenty of website builders and templates out there, but I've always enjoyed building things myself just to understand how they work. This site started as a static webpage hosted on an S3 bucket, but as feature creep grew, so did the needs of the project — leading to a full backend, database, and CMS system.
 
 The stack: **SvelteKit** on the frontend, **Spring Boot** with **PostgreSQL** on the backend, **Nginx** as a reverse proxy, and **Docker Compose** tying it all together.
 
@@ -162,6 +162,8 @@ Database migrations are managed by **Flyway**, so schema changes are versioned a
 
 Nginx sits in front of everything and routes traffic:
 
+![Proxy routing structure](/blog-images/proxy-routing.png)
+
 ```nginx
 upstream frontend-resume {
     server frontend-resume:3000;
@@ -235,21 +237,20 @@ The `depends_on` with `service_healthy` on the database means Spring Boot won't 
 
 Building this project end-to-end reinforced a few things:
 
-- **SvelteKit is a joy to work with.** File-based routing, built-in SSR, and Svelte 5's runes make frontend development fast and intuitive. The mdsvex integration for blog content is particularly elegant.
+- **SvelteKit is a joy to work with.** File-based routing, built-in SSR, and Svelte 5's runes make frontend development fast and intuitive. The mdsvex integration for blog content is particularly elegant (just add another .svx file and you have another blog post!).
 
 - **Docker Compose simplifies multi-service deployments.** Defining the entire stack in one file — with health checks, volumes, and dependency ordering — makes the gap between local development and production much smaller.
 
 - **Nginx as a reverse proxy is the right default.** It cleanly separates concerns, handles routing, and can be extended with SSL termination, rate limiting, or caching without touching application code.
 
-- **Keep it simple.** The visit counter is a small feature, but it touches every layer of the stack — frontend component, API proxy, REST endpoint, service logic, database persistence. That's a full vertical slice through a production architecture.
+- **Keep it simple.** The visit counter is a small feature, but it touches every layer of the stack — frontend component, API proxy, REST endpoint, service logic, database persistence.
 
 ## What's Next
 
 There's always more to build. A few things on the roadmap:
 
-- **SSL/TLS** with Let's Encrypt for HTTPS
 - **CI/CD pipeline** for automated builds and deployments
 - **More blog content** covering specific technical topics
 - **Daily visit tracking** to supplement the running total
 
-If you've made it this far, thanks for reading. The source code for this entire project is available on my GitHub.
+Check out the code on my [GitHub](https://github.com/ElijahCra/Resume-WebStack/)

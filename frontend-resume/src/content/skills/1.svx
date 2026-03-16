@@ -2,5 +2,5 @@
 title: Frameworks and Libraries
 ---
 
-Spring, Spring Boot, React, Next.js, Svelte, Qt6, Flyway
+Spring, Spring Boot, React, Next.js, Svelte, Qt6, Flyway, Lombok, JUnit
 

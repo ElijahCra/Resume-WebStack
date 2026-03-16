@@ -4,11 +4,11 @@ organization: Prime Therapeutics
 startDate: November 2024
 ---
 
-- Managed and executed upgrades for Confluence and Jira instances, including secure file transfer (SCP), patch application, and comprehensive post-upgrade testing to ensure system stability and functionality.
-- Optimized and extended GitHub Actions and GitHub Workflows across the organization to enhance continuous integration (CI), continuous delivery (CD), and security scanning processes. Implemented functionality to support provenance and attestation for software supply chain security.
-- Implemented system to push and pull docker images from AWS Elastic container registry (ECR) for scanning with grype for optura ai support
-- Implemented ec2 deployment stuff with ec2 templates and aws codepipeline support
-- Github activity management with automated removal requests through serviceNow to maintain license count for active users only
-- Dynatrace monitoring and alerts for servers / github runners
-- Diagnosed and resolved critical server performance bottlenecks by utilizing system monitoring tools (htop) to identify memory limitations. Successfully coordinated upgrades to server memory and Java heap sizes, resulting in improved system stability and performance.
+- Optimized and extended GitHub Actions and GitHub Workflows across the organization to enhance continuous integration (CI), continuous delivery (CD), and security scanning processes.
+- Implemented functionality to support provenance and attestation recording for containers built using CI workflows for auditing and software supply chain security.
+- Designed and implemented reusable pipelines to push and pull Docker images to and from AWS Elastic Container Registry (ECR), integrating Grype vulnerability scanning for Optura AI workloads.
+- Architected and deployed EC2 infrastructure using launch templates and AWS CodePipeline, enabling automated and repeatable deployment workflows for application environments.
+- Developed an automated GitHub user management system leveraging the GitHub GraphQL API to identify inactive users and generate ServiceNow removal requests, reducing license costs to only active contributors.
+- Configured Dynatrace monitoring and alerting for production servers and CI/CD runners, establishing automated on-call notification workflows to minimize mean time to detection for infrastructure incidents.
 - Engineered and deployed a React application to Google Kubernetes Engine (GKE), integrating with Confluent Cloud to centralize and visualize Kafka cluster and topic information.
+- Maintained and upgraded internal infrastructure including Confluence and Jira instances, diagnosed server performance bottlenecks using system monitoring tools.

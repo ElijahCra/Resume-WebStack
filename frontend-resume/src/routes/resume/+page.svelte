@@ -32,10 +32,11 @@
 		<Achievements />
 	</div>
 
+	<!--
 	<div class="my-6">
 		<AdditionalInfo />
 	</div>
-
+	-->
 </div>
 
 <Footer />

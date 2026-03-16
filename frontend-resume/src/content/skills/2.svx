@@ -2,4 +2,4 @@
 title: Cloud & DevOps
 ---
 
-AWS, Azure DevOps, Docker, Kafka, CI/CD, Git, GitHub
+AWS, EKS, GCP, GKE, Azure DevOps, Docker, Kubernetes, Kafka, Conlfluent Cloud, Git, GitHub, GitHub Actions

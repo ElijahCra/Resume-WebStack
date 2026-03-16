@@ -2,4 +2,4 @@
 title: Databases
 ---
 
-DynamoDB, MongoDB, Microsoft SQL, Postgresql
+DynamoDB, MongoDB, Microsoft SQL, PostgreSQL

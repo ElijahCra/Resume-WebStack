@@ -2,4 +2,4 @@
 title: Languages
 ---
 
-Java, C++, Python, Typescript
+Java, C++, Python, TypeScript, Bash
